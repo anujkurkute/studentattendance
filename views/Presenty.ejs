@@ -1,0 +1,58 @@
+<%- include('partials/header') %> <%- include('partials/Facultynavbar') %>
+
+<div class="container font">
+  <div class="mb-3 mt-3 visible d-flex">
+    <div class="">
+      <label for="exampleFormControlInput1" class="form-label date">Date</label>
+      <input
+        type="datetime-local"
+        class="form-control datetime-width"
+        name="date"
+      />
+    </div>
+    <div>
+      <label for="exampleFormControlInput1" class="form-label subject">Subject</label>
+      <select name="cars" id="cars" class="sub-width form-control">
+        <option value="volvo">MySQL</option>
+        <option value="saab">MicroSoft Azure</option>
+        <option value="mercedes"> AngularJS</option>
+        <option value="audi">JavaScript</option>
+        <option value="audi">MongoDB</option>
+      </select>
+    </div>
+  </div>
+
+  <table class="table-dark table table-striped visible">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Present</th>
+        <th scope="col">Name</th>
+        <th scope="col">Roll No</th>
+        <th scope="col" class="not-visible">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% studentArray.forEach(function(student){ %>
+      <tr>
+        <form action="/delete" method="post">
+          <th scope="row" name="sid"><%=i%></th>
+          <td class="present" id="check">
+            <input
+              type="checkbox"
+              value="<%=student._id%>"
+              class="not-visible mx-2"
+              for="check"
+            />Present
+          </td>
+          <td name="sname"><%= student.name %></td>
+          <td name="srollno"><%= student.rollno %></td>
+          <td><button type="submit" value="<%=student._id%>" name="remove" class="not-visible remove-btn">Remove</button></td>
+        </form>
+      </tr>
+      <% i++ %> <% }) %>
+    </tbody>
+  </table>
+  <button class="c-btn" onclick="window.print()">Submit</button>
+</div>
+<%- include('partials/footer') %>
